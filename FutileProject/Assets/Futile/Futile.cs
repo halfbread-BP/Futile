@@ -75,7 +75,10 @@ public class Futile : MonoBehaviour
 	private void Awake () 
 	{
 		instance = this;
-		isOpenGL = SystemInfo.graphicsDeviceVersion.Contains("OpenGL");
+		isOpenGL =
+			UnityEngine.Rendering.GraphicsDeviceType.OpenGLES3 ||
+			UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2 ||
+			UnityEngine.Rendering.GraphicsDeviceType.OpenGLCore;
 		enabled = false;
 		name = "Futile";
 
@@ -423,7 +426,7 @@ public class Futile : MonoBehaviour
 		_shouldRunGCNextUpdate = true;
 	}
 	
-	new public Camera camera
+	public Camera mainCamera
 	{
 		get {return _camera;}	
 	}
