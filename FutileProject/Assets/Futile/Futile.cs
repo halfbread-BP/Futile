@@ -75,10 +75,11 @@ public class Futile : MonoBehaviour
 	private void Awake () 
 	{
 		instance = this;
+		gdt = SystemInfo.graphicsDeviceType;
 		isOpenGL =
-			UnityEngine.Rendering.GraphicsDeviceType.OpenGLES3 ||
-			UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2 ||
-			UnityEngine.Rendering.GraphicsDeviceType.OpenGLCore;
+			gdt == UnityEngine.Rendering.GraphicsDeviceType.OpenGLES3 ||
+			gdt == UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2 ||
+			gdt == UnityEngine.Rendering.GraphicsDeviceType.OpenGLCore;
 		enabled = false;
 		name = "Futile";
 
