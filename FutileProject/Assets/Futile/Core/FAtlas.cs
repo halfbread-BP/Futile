@@ -22,7 +22,6 @@ public class FAtlasElement
 	public Vector2 sourceSize;
 	public Vector2 sourcePixelSize;
 	public bool isTrimmed;
-	//public bool isRotated;
 	
 	public FAtlasElement Clone()
 	{
@@ -207,21 +206,18 @@ public class FAtlas
 				
 			element.uvRect = uvRect;
 		
-			element.uvTopLeft.Set(uvRect.xMin,uvRect.yMax);
-			element.uvTopRight.Set(uvRect.xMax,uvRect.yMax);
-			element.uvBottomRight.Set(uvRect.xMax,uvRect.yMin);
-			element.uvBottomLeft.Set(uvRect.xMin,uvRect.yMin);
-
+			element.uvTopLeft = new Vector2(uvRect.xMin, uvRect.yMax);
+			element.uvTopRight = new Vector2(uvRect.xMax, uvRect.yMax);
+			element.uvBottomRight = new Vector2(uvRect.xMax, uvRect.yMin);
+			element.uvBottomLeft = new Vector2(uvRect.xMin, uvRect.yMin);
 
 			//the source size is the untrimmed size
 			IDictionary sourcePixelSize = (IDictionary)itemDict["sourceSize"];
-
-			element.sourcePixelSize.x = float.Parse(sourcePixelSize["w"].ToString());	
-			element.sourcePixelSize.y = float.Parse(sourcePixelSize["h"].ToString());	
-
-			element.sourceSize.x = element.sourcePixelSize.x * scaleInverse;	
-			element.sourceSize.y = element.sourcePixelSize.y * scaleInverse;
-
+			float w = float.Parse(sourcePixelSize["w"].ToString());
+			float h = float.Parse(sourcePixelSize["h"].ToString());
+			
+			element.sourcePixelSize = new Vector2(w, h);
+			element.sourceSize = element.sourcePixelSize * scaleInverse;
 
 			//this rect is the trimmed size and position relative to the untrimmed rect
 			IDictionary sourceRect = (IDictionary)itemDict["spriteSourceSize"];
@@ -331,18 +327,16 @@ public class FAtlas
 
 	public FAtlasElement CreateNamedElement (string elementName, float leftX, float bottomY, float pixelWidth, float pixelHeight)
 	{
-		FAtlasElement element = _elementsByName[elementName];
-
-		if(element == null) //it doesn't exist, so create it (if it does exist we just update it)
+		if (!_elementsByName.TryGetValue(elementName, out FAtlasElement element))
 		{
-			element = new FAtlasElement();
-			element.name = elementName;
-			element.atlas = this;
-			element.atlasIndex = _index;
-			
-			_elementsByName.Add(elementName,element);
-			_elements.Add(element);
-			Futile.atlasManager.AddElement(element);
+    		element = new FAtlasElement();
+    		element.name = elementName;
+    		element.atlas = this;
+    		element.atlasIndex = _index;
+
+    		_elementsByName.Add(elementName, element);
+    		_elements.Add(element);
+    		Futile.atlasManager.AddElement(element);
 		}
 
 		UpdateElement(element,leftX,bottomY,pixelWidth,pixelHeight);
@@ -352,9 +346,10 @@ public class FAtlas
 
 	public void Unload ()
 	{
-		if(_isTextureAnAsset)
+		if(_isTextureAnAsset && _texture != null)
 		{
 			Resources.UnloadAsset(_texture);
+			_texture = null;
 		}
 	}
 	
