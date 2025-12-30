@@ -1,5 +1,5 @@
 
-# Futile (2021 Edition)
+# Futile (2026 Edition)
 
 Futile is a code-centric 2D framework for Unity. 
 
@@ -9,16 +9,19 @@ If you've used Cocos2D or Flash you should feel right at home.
 
 It's in development and completely undocumented... but it works. 
 
-2021 note from Matt: Futile hasn't been updated a whole lot since I first released it, but it has been used (and continues to be used) in a bunch of real games
+2026* NOTE: This version of Futile is updated to support modern Unity versions. There's no actual improvements to the framework which i would *love* to do but for some reason i detest coding frameworks and custom systems and such...
 ___
 
-## Go to http://struct.ca/futile for UnityPackages and instructional videos
+##  ̶G̶o̶ ̶t̶o̶ ̶h̶t̶t̶p̶:̶/̶/̶s̶t̶r̶u̶c̶t̶.̶c̶a̶/̶f̶u̶t̶i̶l̶e̶ ̶f̶o̶r̶ ̶U̶n̶i̶t̶y̶P̶a̶c̶k̶a̶g̶e̶s̶ ̶a̶n̶d̶ ̶i̶n̶s̶t̶r̶u̶c̶t̶i̶o̶n̶a̶l̶ ̶v̶i̶d̶e̶o̶s̶
 
 ## Ask questions and share stuff you've made on http://reddit.com/r/futile
+*dead subreddit don't bother posting anything*
 
 ## Submit bugs and feature requests to http://github.com/MattRix/Futile/issues
+*no longer maintained so i guess just do it from this fork; since i dont actually have proper hardware to test this out, im just guessing from the C# knowledge i have...*
 
 ## Futile works great with all versions of Unity (but let me know if you have any issues!)
+*now it does*
 
 ## How to try the demo project: ##
 
